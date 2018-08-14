@@ -1,4 +1,6 @@
-package ua.volkov;
+package ua.volkov.model;
+
+import ua.volkov.interfaces.IElevator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +9,7 @@ import java.util.Random;
 @SuppressWarnings("unchecked")
 public class Building {
     private int floors;
-    private Elevator elevator;
+    private IElevator elevator;
     private List<Integer>[] passengersInFloor;
     private static Random r = new Random();
     private static final int STEPS_TO_VIEW = 10; // i will show you 10 steps of work cycle
@@ -47,7 +49,7 @@ public class Building {
         ArrayList<Integer> indexesToDelete = new ArrayList<Integer>();
         for(int i=0;i<passengersInFloor[elevator.getCurrentFloor()-1].size() && !elevator.isFull();i++){
             if(elevator.isDirection()){ //if lift goes up
-                if(passengersInFloor[elevator.getCurrentFloor()-1].get(i) > elevator.getCurrentFloor()){
+                if(passengersInFloor[elevator.getCurrentFloor()-1].get(i) > elevator.getCurrentFloor()){//DRY :(
                    indexesToDelete.add(i);
                    elevator.addPassenger(
                            passengersInFloor[elevator.getCurrentFloor()-1].get(i));
@@ -70,8 +72,7 @@ public class Building {
 
 
     private int removePassengersFromLift(){
-        int  removedPass=elevator.removePassengers();
-        return removedPass;
+        return elevator.removePassengers();
     }
 
 
@@ -117,9 +118,6 @@ public class Building {
             //if peoples who want to go up less then another peoples set direction false(down)
             // true otherwise
         }
-
-
-
     }
 
     public String toString(){

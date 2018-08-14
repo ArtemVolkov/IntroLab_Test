@@ -1,6 +1,8 @@
-package ua.volkov;
+package ua.volkov.model;
 
-public class Elevator {
+import ua.volkov.interfaces.IElevator;
+
+public class Elevator implements IElevator{
     private static final int MAX_PASSENGERS = 5;
     private int[] passengers = new int[MAX_PASSENGERS]; //passengers in elevator
 
@@ -59,7 +61,7 @@ public class Elevator {
 
 
     private int findClosestPassengerFloorIfElevatorFull(){
-        int result = 0;
+        int result=0;
         if(direction){
             int min=maxFloor+1;
             for(int i: passengers)

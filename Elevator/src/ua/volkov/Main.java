@@ -1,4 +1,6 @@
 package ua.volkov;
+import ua.volkov.model.Building;
+
 import java.util.Random;
 
 public class Main {
